@@ -1,9 +1,10 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/**/*.ts",
-      "use": "@vercel/node"
+  "functions": {
+    "api/slack.ts": {
+      "maxDuration": 10
+    },
+    "api/worker.ts": {
+      "maxDuration": 60
     }
-  ]
+  }
 }
