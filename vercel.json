@@ -1,10 +1,23 @@
 {
-  "functions": {
-    "api/slack.ts": {
-      "maxDuration": 10
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/slack.ts",
+      "use": "@vercel/node"
     },
-    "api/worker.ts": {
-      "maxDuration": 60
+    {
+      "src": "api/worker.ts",
+      "use": "@vercel/node"
     }
-  }
+  ],
+  "routes": [
+    {
+      "src": "/api/slack",
+      "dest": "api/slack.ts"
+    },
+    {
+      "src": "/api/worker",
+      "dest": "api/worker.ts"
+    }
+  ]
 }
