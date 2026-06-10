@@ -2,6 +2,10 @@
   "version": 2,
   "builds": [
     {
+      "src": "public/**/*",
+      "use": "@vercel/static"
+    },
+    {
       "src": "api/slack.ts",
       "use": "@vercel/node"
     },
@@ -18,6 +22,14 @@
     {
       "src": "/api/worker",
       "dest": "api/worker.ts"
+    },
+    {
+      "src": "/",
+      "dest": "/public/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
     }
   ]
 }

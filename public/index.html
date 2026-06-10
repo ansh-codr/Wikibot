@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archify - Save Slack decisions to Notion</title>
+  <meta name="description" content="Archify saves important Slack threads to Notion automatically — one emoji, zero effort.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0F0F0F;
+      --text-main: #FFFFFF;
+      --text-muted: #A1A1AA;
+      --accent: #6C63FF;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    
+    .bg-glow {
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(108,99,255,0.15) 0%, rgba(15,15,15,0) 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    nav {
+      padding: 32px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-icon {
+      color: var(--accent);
+    }
+    
+    .hero {
+      text-align: center;
+      padding: 100px 0 60px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .hero h1 {
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+      background: linear-gradient(to right, #FFFFFF, #B0B0B0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .hero p {
+      font-size: clamp(18px, 2vw, 22px);
+      color: var(--text-muted);
+      margin-bottom: 48px;
+      font-weight: 400;
+      max-width: 600px;
+      margin-inline: auto;
+    }
+    
+    .cta-container {
+      max-width: 460px;
+      margin: 0 auto 32px;
+      position: relative;
+    }
+
+    .social-proof {
+      font-size: 14px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 500;
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      padding: 60px 0 100px;
+    }
+    
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 40px 32px;
+      border-radius: 24px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(108, 99, 255, 0.4);
+    }
+    
+    .feature-icon {
+      font-size: 32px;
+      margin-bottom: 24px;
+      background: rgba(108, 99, 255, 0.1);
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+    }
+    
+    .feature-card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 0 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <span class="logo-icon">▲</span> Archify
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <h1>Your best Slack decisions are dying in the scroll.</h1>
+        <p>Archify saves important Slack threads to Notion automatically — one emoji, zero effort.</p>
+        
+        <div class="cta-container">
+          <iframe data-tally-src="https://tally.so/embed/TALLY_FORM_ID?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="200" frameborder="0" marginheight="0" marginwidth="0" title="Get Early Access"></iframe>
+          <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+        </div>
+
+        <div class="social-proof">
+          Built for remote-first teams who live in Slack.
+        </div>
+      </section>
+
+      <section class="features">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>One emoji trigger</h3>
+          <p>React with 🧠 on any thread. That's it.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3>AI-powered summaries</h3>
+          <p>Claude extracts decisions, action items, and context automatically.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <h3>Searchable forever</h3>
+          <p>Every saved thread becomes a clean, tagged Notion page your whole team can find.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
