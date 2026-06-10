@@ -1,4 +1,11 @@
-import { handleSlackWebhook } from '../lib/slack-ingress.js';
+import { processThreadJob } from '../lib/process-thread.js';
+import {
+  verifySlackSignature,
+  shouldProcessReaction,
+  buildThreadJob,
+  type SlackEventEnvelope
+} from '../lib/slack-webhook.js';
+import { loadWorkspaceConfig } from '../lib/config.js';
 
 export const config = {
   api: {
@@ -25,12 +32,40 @@ export default async function handler(req: any, res: any): Promise<void> {
   const timestamp = String(headers['x-slack-request-timestamp'] ?? '');
   const signature = String(headers['x-slack-signature'] ?? '');
 
-  const result = await handleSlackWebhook({
-    env: process.env,
-    rawBody,
-    timestamp,
-    signature
-  });
+  const signingSecret = process.env.SLACK_SIGNING_SECRET;
+  if (!signingSecret) {
+    res.status(500).send('missing Slack signing secret');
+    return;
+  }
 
-  res.status(result.status).send(result.body);
+  if (!verifySlackSignature({ signingSecret, rawBody, timestamp, signature })) {
+    res.status(401).send('invalid signature');
+    return;
+  }
+
+  const envelope = body as SlackEventEnvelope;
+
+  if (envelope.type !== 'event_callback' || envelope.event?.type !== 'reaction_added') {
+    res.status(200).send('ignored');
+    return;
+  }
+
+  const workspaceConfig = loadWorkspaceConfig(process.env as Record<string, string | undefined>, envelope.team_id);
+
+  if (!shouldProcessReaction(envelope.event, workspaceConfig)) {
+    res.status(200).send('ignored');
+    return;
+  }
+
+  const job = buildThreadJob(envelope);
+
+  // Send response immediately to Slack
+  res.status(200).end('processing');
+
+  // Process the thread inline
+  try {
+    await processThreadJob(job);
+  } catch (error) {
+    console.error('Error processing thread inline:', error);
+  }
 }
