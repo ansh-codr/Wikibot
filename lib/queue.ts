@@ -26,7 +26,7 @@ function getQueue(): Queue {
 }
 
 export async function enqueueThreadJob(job: ThreadJob): Promise<void> {
-  const jobId = `${job.workspaceId}:${job.channelId}:${job.threadTs}:${job.eventId}`;
+  const jobId = `${job.workspaceId}-${job.channelId}-${job.threadTs}-${job.eventId}`.replace(/:/g, '-').replace(/\./g, '-');
   const queueInstance = getQueue();
 
   await queueInstance.add('process-thread', job, {
