@@ -59,13 +59,13 @@ export default async function handler(req: any, res: any): Promise<void> {
 
   const job = buildThreadJob(envelope);
 
-  // Send response immediately to Slack
-  res.status(200).end('processing');
-
-  // Process the thread inline
+  // Process FIRST
   try {
     await processThreadJob(job);
   } catch (error) {
-    console.error('Error processing thread inline:', error);
+    console.error('Error processing thread:', error);
   }
+
+  // THEN respond to Slack
+  res.status(200).end('ok');
 }
