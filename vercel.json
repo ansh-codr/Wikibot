@@ -8,20 +8,12 @@
     {
       "src": "api/slack.ts",
       "use": "@vercel/node"
-    },
-    {
-      "src": "api/worker.ts",
-      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/slack",
       "dest": "api/slack.ts"
-    },
-    {
-      "src": "/api/worker",
-      "dest": "api/worker.ts"
     },
     {
       "src": "/",

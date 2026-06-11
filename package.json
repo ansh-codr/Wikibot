@@ -2,20 +2,18 @@
   "name": "wikibot",
   "private": true,
   "version": "0.1.0",
+  "description": "Archify saves important Slack threads to Notion automatically.",
   "type": "module",
   "scripts": {
     "dev": "vercel dev",
     "build": "echo ok",
     "check": "tsc -p tsconfig.json --noEmit",
     "migrate": "node --loader ts-node/esm scripts/migrate.ts",
-    "worker": "node --loader ts-node/esm scripts/worker.ts",
     "test-e2e": "node --loader ts-node/esm scripts/test-e2e.ts"
   },
   "dependencies": {
     "@notionhq/client": "^2.2.15",
-    "@slack/bolt": "^4.4.0",
     "@slack/web-api": "^7.8.0",
-    "bullmq": "^5.41.1",
     "groq-sdk": "^1.2.1",
     "pg": "^8.12.0",
     "zod": "^3.25.67"
